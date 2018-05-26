@@ -17,7 +17,6 @@ public class LogsController {
 	private LogFileReaderService fileReaderService;
 
 	@Scheduled(fixedDelay = 5000)
-	@MessageMapping("/logs")
 	@SendTo("/topic/logs")
 	public void logs() throws Exception {
 		this.template.convertAndSend("/topic/logs", new Log(fileReaderService.readFile()));
